@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>피하기게임</title>
+</head>
+<body>
+    <div class="container">
+        <div class="game-wrap">
+            <div class="box"></div>
+        </div>
+        <div class="key-wrap">
+            <p class="key arrow-up"><span class="txt-key">▲</span></p>
+            <p class="key arrow-left"><span class="txt-key">◀</span></p>
+            <p class="key arrow-down"><span class="txt-key">▼</span></p>
+            <p class="key arrow-right"><span class="txt-key">▶</span></p>
+        </div>
+    </div>
+
+
+
+
+    <script>
+        const box = document.querySelector('.box');
+        const keyUp = document.querySelector('.arrow-up');
+        const keyLeft = document.querySelector('.arrow-left');
+        const keyDown = document.querySelector('.arrow-down');
+        const keyRight = document.querySelector('.arrow-right');
+        let posX=0;
+        let posY=555;
+        const keys={};
+
+        document.addEventListener('keydown',(e)=>{
+            keys[e.key]=true;
+            console.log(keys);
+        });
+        document.addEventListener('keyup',(e)=>{
+            keys[e.key]=false;
+        });
+
+
+        function play(){
+
+            if(keys.ArrowRight&&posX<810){
+                posX+=5;
+                box.style.transform = `translateX(${posX}px) translateY(${posY}px)`;
+                keyRight.classList.add('key-press');
+            }else{
+                keyRight.classList.remove('key-press');
+            }
+
+
+            if(keys.ArrowLeft&&posX>0){
+                posX-=5;
+                box.style.transform = `translateX(${posX}px) translateY(${posY}px)`;
+                keyLeft.classList.add('key-press');
+            }else{
+                keyLeft.classList.remove('key-press');
+            }
+
+
+            if(keys.ArrowDown&&posY<590){
+                posY+=5;
+                box.style.transform = `translateX(${posX}px) translateY(${posY}px)`;
+                keyDown.classList.add('key-press');
+            }else{
+                keyDown.classList.remove('key-press');
+            }
+
+
+
+            if(keys.ArrowUp&&posY>0){
+                posY-=5;
+                box.style.transform = `translateX(${posX}px) translateY(${posY}px)`;
+                keyUp.classList.add('key-press');
+            }else{
+                keyUp.classList.remove('key-press');
+            }
+
+            window.requestAnimationFrame(play);
+        }
+        window.requestAnimationFrame(play);
+    </script>
+</body>
+</html>
