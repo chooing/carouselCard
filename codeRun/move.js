@@ -1,63 +1,92 @@
+const startBtn = document.querySelector('.start-page .btn-start');
+const infoWrap = document.querySelector('.info-wrap');
+const scoreTxt = infoWrap.querySelector('.score-txt');
+const lifeTxt = infoWrap.querySelector('.life-txt');
 const gameWrap = document.querySelector('.game-wrap');
 const character = gameWrap.querySelector('.character');
-const keyUp = document.querySelector('.arrow-up');
-const keyLeft = document.querySelector('.arrow-left');
-const keyDown = document.querySelector('.arrow-down');
-const keyRight = document.querySelector('.arrow-right');
-let characterPosX=657;
 const keys={};
+let characterPosX=657;
+let scoreNum = 0;
+let lifeNum = 5;
 
-class FireMake{
-    constructor(){
-        this.firePosX= Math.floor(Math.random()*1330);
-        this.firePosY=-140;
+// item class
+class ItemMake{
+    constructor(item){
+        this.itemPosX= Math.floor(Math.random()*1330);
+        this.itemPosY=-140;
         this.divEl=document.createElement('div');
+        this.item = item;
     }
     making(){
-        this.divEl.classList.add('item','fire');
-        this.divEl.style.transform = `translateY(${this.firePosY}px)`
-        this.divEl.style.left = this.firePosX+'px';
+        this.divEl.classList.add('item',this.item);
+        this.divEl.style.transform = `translateY(${this.itemPosY}px)`
+        this.divEl.style.left = this.itemPosX+'px';
         gameWrap.appendChild(this.divEl);
     }
     dropDown(){
         const moving = setInterval(()=>{
-            if(this.firePosY<620){
-                this.firePosY +=5;
-                this.divEl.style.transform = `translateY(${this.firePosY}px)`;
+            if(this.itemPosY<620){
+                this.itemPosY +=5;
+                this.divEl.style.transform = `translateY(${this.itemPosY}px)`;
             }else{
                 this.divEl.remove();
                 clearInterval(moving);
             }
-            if(this.firePosY >= 530){
-                if(this.firePosX <= characterPosX+35 && this.firePosX+70 >= characterPosX+35  ){
-                    console.log('아야');
-                    this.divEl.remove();
-                    clearInterval(moving);
+            if(this.itemPosY >= 535 && this.itemPosX <= characterPosX+35 && this.itemPosX+70 >= characterPosX+35){
+                if( this.item === 'fire'){
+                    --lifeNum;
+                    lifeTxt.textContent = lifeNum;
+                }else if(this.item === 'coin'){
+                    scoreNum += 100;
+                    scoreTxt.textContent = scoreNum;
+                    
+                }else if(this.item === 'heart'){
+                    ++lifeNum;
+                    lifeTxt.textContent = lifeNum;
                 }
+                this.divEl.remove();
+                clearInterval(moving);
             }
         },20);
     }
 }
 
-class itemMake{
-    constructor(){
+startBtn.addEventListener('click',(e)=>{
+    e.target.parentElement.classList.add('close');
+    infoWrap.classList.remove('close');
+    character.classList.remove('close');
+    console.dir();
+    MakingitemAuto();
+});
 
-    }
+
+// item make auto
+function MakingitemAuto() {
+    const coinAuto = setInterval(()=>{
+        const coin = new ItemMake('coin');
+        coin.making();
+        coin.dropDown();
+    },3000);
+    
+    const heartAuto = setInterval(()=>{
+        const heart = new ItemMake('heart');
+        heart.making();
+        heart.dropDown();
+    },7000);
+    
+    const fire = new ItemMake('fire');
+    fire.making();
+    fire.dropDown();
+    
+    const fireAuto = setInterval(()=>{
+        const fire = new ItemMake('fire');
+        fire.making();
+        fire.dropDown();
+    },1000);
 }
 
 
-
-
-const fire = new FireMake();
-fire.making();
-fire.dropDown();
-
-setInterval(()=>{
-    const fire = new FireMake();
-    fire.making();
-    fire.dropDown();
-},1000);
-
+// character right & left move
 document.addEventListener('keydown',(e)=>{
     if(e.key==='ArrowRight'||e.key==='ArrowLeft'){
         keys[e.key]=true;
@@ -71,24 +100,19 @@ document.addEventListener('keyup',(e)=>{
 
 
 function play(){
-    if(keys.ArrowRight&&characterPosX<1314){
+    if(keys.ArrowRight&&characterPosX<1330){
         characterPosX+=2;
         character.style.transform = `translateX(${characterPosX}px) rotateY(0deg)`;
         character.classList.add('move');
-        // keyRight.classList.add('key-press');
-    }else{
-        character.classList.remove('move');
-        // keyRight.classList.remove('key-press');
     }
 
     if(keys.ArrowLeft&&characterPosX>0){
         characterPosX-=2;
         character.style.transform = `translateX(${characterPosX}px) rotateY(180deg)`;
         character.classList.add('move');
-        // keyLeft.classList.add('key-press');
-    }else{
-        // keyLeft.classList.remove('key-press');
     }
+
+    if(!keys.ArrowRight && !keys.ArrowLeft){character.classList.remove('move');}
 
     window.requestAnimationFrame(play);
 }
