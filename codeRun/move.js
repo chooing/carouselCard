@@ -101,13 +101,13 @@ document.addEventListener('keyup',(e)=>{
 
 function play(){
     if(keys.ArrowRight&&characterPosX<1330){
-        characterPosX+=2;
+        characterPosX+=5;
         character.style.transform = `translateX(${characterPosX}px) rotateY(0deg)`;
         character.classList.add('move');
     }
 
     if(keys.ArrowLeft&&characterPosX>0){
-        characterPosX-=2;
+        characterPosX-=5;
         character.style.transform = `translateX(${characterPosX}px) rotateY(180deg)`;
         character.classList.add('move');
     }
