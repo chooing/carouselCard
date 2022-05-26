@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<body>
+    <form action="" id="form">
+        <label for="txtInput">name:</label>
+        <input type="text" class="txt" id="txtInput">
+        <label for="pwInput">pw:</label>
+        <input type="password" class="pw" id="pwInput">
+        <label for="genderF">F</label>
+        <input type="radio" name="gender" class="gender" value="F" id="genderF">
+        <label for="genderM">M</label>
+        <input type="radio" name="gender" class="gender" value="M" id="genderM">
+        <button type="submit">제출</button>
+    </form>
+    <script>
+        const form = document.getElementById('form');
+        form.addEventListener('submit',(e)=>{
+            e.preventDefault();
+            // const data = new FormData(form);
+            const radio = document.getElementsByName('gender');
+            // console.log(data);
+            console.log(radio);
+        });
+    </script>
+</body>
+</html>

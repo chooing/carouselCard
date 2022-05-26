@@ -1,0 +1,260 @@
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap');
+@font-face {
+    font-family: 'EarlyFontDiary';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_220508@1.0/EarlyFontDiary.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* reset */
+body, input{
+    margin: 0;
+    padding: 0;
+}
+h1, h2, h3, p, label{
+    padding: 0;
+    margin: 0;
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+input,textarea{font-size: inherit;}
+input:focus,textarea:focus{outline: none;}
+
+button{
+    font-size: inherit;
+    font-family: inherit;
+    font-weight: 700;
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+ol,ul,li{
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+
+/* setting */
+body{
+    background-color: #f6f6f6;
+    font-family: 'Gowun Batang', serif;
+}
+
+.hide{
+	display:block;
+	overflow:hidden;
+	Font-size:1px;
+	line-height:0;
+	text-indent:-9999px;
+}
+
+.btn{
+    display: inline-block;
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: gold;
+    border-radius: 5px;
+}
+
+/* scroll */
+.scroll::-webkit-scrollbar {
+    width: 10px;
+    cursor: pointer;
+}
+.scroll::-webkit-scrollbar-thumb {
+    background-color: #eee;
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+}
+.scroll::-webkit-scrollbar-track {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 5px white;
+}
+
+/* layout */
+.wrapping{
+    max-width: 1600px;
+    padding: 0 40px;
+    display: flex;
+    gap: 20px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: 60px auto;
+}
+
+.content-wrap{
+    padding:50px 30px 40px;
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.input-wrap{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin:  20px 0;
+}
+
+/* design */
+.emoji::before,
+.memo::before{
+    display: inline-block;
+    content: '';
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.smile-emoji::before{background-image: url(./images/smile_emoji.png);}
+.love-emoji::before{background-image: url(./images/love_emoji.png); background-size: 67px;}
+.sick-emoji::before{background-image: url(./images/sick_emoji.png);}
+.sad-emoji::before{background-image: url(./images/sad_emoji.png);}
+.angry-emoji::before{background-image: url(./images/angry_emoji.png);}
+.star-emoji::before{background-image: url(./images/star_emoji.png);}
+.like-emoji::before{background-image: url(./images/like_emoji.png);}
+
+/* emoji class end*/
+
+.write-wrap{
+    width: 40%;
+}
+.write-title{
+    text-align: center;
+    font-size: 50px;
+    font-weight: 800;
+    color: #333;
+    position: relative;
+    z-index: 0;
+    font-family: 'EarlyFontDiary';
+}
+
+.write-title::before{
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: 15px 45px -5px;
+    background-color: rgba(255, 217, 0, 0.5);
+    z-index: -1;
+}
+
+.write-input{
+    width: 100%;
+    font-family: 'Gowun Batang', serif;
+}
+.title-input{
+    font-size: 25px;
+    border: none;
+    border-bottom: 3px solid #eee;
+    font-weight: 700;
+    padding-bottom: 10px;
+    margin-top: 40px;
+}
+
+.txt-input{
+    height: 350px;
+    padding: 15px;
+    box-sizing: border-box;
+    border: 3px solid #eee;
+    font-size: 20px;
+    resize: none;
+    border-radius: 5px;
+    overflow-y: auto;
+}
+
+.title-input:focus,
+.txt-input:focus{border-color: #999;}
+
+.emoji{
+    min-width: 70px;
+    height: 70px;
+}
+.emoji::before{
+    width: 70px;
+    height: 70px;
+    background-size: 60px;
+    background-color: #fff;
+    filter: grayscale(1);
+}
+.emoji:checked::before{filter: grayscale(0);}
+
+.btn-upload{
+    width: 100%;
+    margin-top: 10px;
+    font-size: 20px;    
+    padding: 20px;
+}
+
+/* write-wrap end */
+
+
+.list-wrap{width: 60%;}
+
+
+.list-wrap .memo-list{
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+.memo-list.scroll::-webkit-scrollbar-thumb {
+    background-color: gold;
+}
+.memo{
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+    border-top: 1px solid #f6f6f6;
+    border-left: 1px solid #f6f6f6;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.memo::before{
+    width: 35px;
+    height: 35px;
+    background-size: 30px;
+}
+.memo.love-emoji::before{
+    background-size: 34px;
+}
+.memo .title-memo{
+    font-weight: 700;
+    font-size: 25px;
+    width: 740px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;  
+}
+.memo .txt-memo{
+    width: 100%;
+    max-height: 210px;
+    margin:15px 0 ;
+    padding-right: 10px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    font-size: 20px;
+    line-height: 1.6;
+    text-align:justify;
+    letter-spacing: 1px;
+}
+
+.memo .time-memo{
+    color: #aaa;
+}
+.memo .btn-delete{
+    padding: 5px 10px;
+}
