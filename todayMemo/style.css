@@ -27,6 +27,7 @@ button{
     font-weight: 700;
     border: none;
     background-color: rgba(0, 0, 0, 0);
+    cursor: pointer;
 }
 
 ol,ul,li{
@@ -53,7 +54,6 @@ body{
     display: inline-block;
     padding: 10px;
     box-sizing: border-box;
-    background-color: gold;
     border-radius: 5px;
 }
 
@@ -76,7 +76,7 @@ body{
 
 /* layout */
 .wrapping{
-    max-width: 1600px;
+    max-width: 1800px;
     padding: 0 40px;
     display: flex;
     gap: 20px;
@@ -127,7 +127,7 @@ body{
 .write-title{
     text-align: center;
     font-size: 50px;
-    font-weight: 800;
+    font-weight: 810;
     color: #333;
     position: relative;
     z-index: 0;
@@ -156,6 +156,7 @@ body{
     border: none;
     border-bottom: 3px solid #eee;
     font-weight: 700;
+    padding: 0 15px 5px 15px;
     padding-bottom: 10px;
     margin-top: 40px;
 }
@@ -192,13 +193,15 @@ body{
     margin-top: 10px;
     font-size: 20px;    
     padding: 20px;
+    background-color: #999;
 }
 
+.btn-upload:hover{
+    background-color: gold;
+}
 /* write-wrap end */
 
-
 .list-wrap{width: 60%;}
-
 
 .list-wrap .memo-list{
     width: 100%;
@@ -234,14 +237,15 @@ body{
 .memo .title-memo{
     font-weight: 700;
     font-size: 25px;
-    width: 740px;
+    width: 860px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;  
+    
 }
 .memo .txt-memo{
     width: 100%;
-    max-height: 210px;
+    max-height: 290px;
     margin:15px 0 ;
     padding-right: 10px;
     box-sizing: border-box;
@@ -257,4 +261,32 @@ body{
 }
 .memo .btn-delete{
     padding: 5px 10px;
+    border: 1px solid #ddd;
+    background-color: #eee;
+    color: #666;
+}
+.memo .btn-delete:hover{
+    background-color: #888;
+    color: #fff;
+}
+/* .list-wrap end */
+.all-delete-btn{
+    position: fixed;
+    height: 60px;
+    right: -85px;
+    bottom: 30px;
+    border-radius: 50px 0 0 50px;
+    padding: 10px 20px;
+    transition: right 0.5s;
+    background-color: #333;
+    color: #fff;
+    text-align: left;
+}
+.all-delete-btn::before{
+    content: '✖';
+    display: inline-block;
+    padding-right: 15px;
+}
+.all-delete-btn:hover{
+    right: 0px;
 }
