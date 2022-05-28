@@ -14,34 +14,53 @@
             <h2 class="write-title">오늘 하루는 어땠나요?</h2>
             <div class="input-wrap">
                 <label for="titleInput" class="hide">메모의 제목을 적는 칸입니다.</label>
-                <input type="text" id="titleInput" class="title-input write-input" placeholder="제목" maxlength="40">
+                <input type="text" id="titleInput" class="title-input write-input" placeholder="제목(40자 내)" maxlength="40">
             </div>
             <div class="input-wrap">
                 <label for="txtInput" class="hide">메모의 내용을 적는 칸입니다.</label>
                 <textarea name="txtInput" id="txtInput" class="txt-input write-input scroll" cols="30" rows="10" placeholder="내용"></textarea>
             </div>
-            <div class="input-wrap">
+            <div class="emoji-wrap">
                 <input type="radio" name="emoji" id="smileEmoji" value="smile"  class="smile-emoji emoji" checked>
                 <label for="smileEmoji" class="hide">웃음</label>
+                
+                <input type="radio" name="emoji" id="lolEmoji" value="lol"  class="lol-emoji emoji">
+                <label for="lolEmoji" class="hide">신남</label>
+                
                 <input type="radio" name="emoji" id="loveEmoji" value="love"  class="love-emoji emoji">
-                <label for="loveEmoji" class="hide">사랑</label>                
+                <label for="loveEmoji" class="hide">뽀뽀</label>                
+                
+                <input type="radio" name="emoji" id="pensiveEmoji" value="pensive"  class="pensive-emoji emoji">
+                <label for="pensiveEmoji" class="hide">시무룩</label>
+                
+                <input type="radio" name="emoji" id="tiredEmoji" value="tired"  class="tired-emoji emoji">
+                <label for="tiredEmoji" class="hide">지침</label>
+                
                 <input type="radio" name="emoji" id="sickEmoji" value="sick"  class="sick-emoji emoji">
                 <label for="sickEmoji" class="hide">아픔</label>
+                
                 <input type="radio" name="emoji" id="sadEmoji" value="sad"  class="sad-emoji emoji">
                 <label for="sadEmoji" class="hide">슬픔</label>
+                
                 <input type="radio" name="emoji" id="angryEmoji" value="angry"  class="angry-emoji emoji">
                 <label for="angryEmoji" class="hide">화남</label> 
+                
                 <input type="radio" name="emoji"id="starEmoji" value="star"  class="star-emoji emoji">
                 <label for="starEmoji" class=" hide">중요</label> 
+                
                 <input type="radio" name="emoji" id="likeEmoji" value="like"  class="like-emoji emoji">
                 <label for="likeEmoji" class="hide">좋아요</label>
+                
+                <input type="radio" name="emoji" id="heartEmoji" value="heart"  class="heart-emoji emoji">
+                <label for="heartEmoji" class="hide">하트</label>
             </div>
                 <button type="button" class="btn btn-upload">등록</button>
         </section>
         <section class="list-wrap content-wrap">
+            <span class="waiting-msg">새로운 하루를 작성해 보아요:)</span>
             <ol class="memo-list scroll"></ol>
-            <button class="all-delete-btn">전체 삭제</button>
         </section>
+        <button class="all-delete-btn">전체 삭제</button>
 
     </div>
     

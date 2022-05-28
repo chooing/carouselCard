@@ -85,23 +85,20 @@ body{
     right: 0;
     top: 0;
     bottom: 0;
-    margin: 60px auto;
+    margin:  auto;
 }
 
 .content-wrap{
     padding:50px 30px 40px;
     background-color: #fff;
     border-radius: 10px;
-    overflow: hidden;
+    margin: 40px 0;
+    box-sizing: border-box;
 }
 
 .input-wrap{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin:  20px 0;
+    margin-bottom: 20px;
 }
-
 /* design */
 .emoji::before,
 .memo::before{
@@ -112,19 +109,28 @@ body{
 }
 
 .smile-emoji::before{background-image: url(./images/smile_emoji.png);}
-.love-emoji::before{background-image: url(./images/love_emoji.png); background-size: 67px;}
+.love-emoji::before{background-image: url(./images/love_emoji.png); background-size: 50px;}
+.tired-emoji::before{background-image: url(./images/tired_emoji.png);}
 .sick-emoji::before{background-image: url(./images/sick_emoji.png);}
 .sad-emoji::before{background-image: url(./images/sad_emoji.png);}
 .angry-emoji::before{background-image: url(./images/angry_emoji.png);}
 .star-emoji::before{background-image: url(./images/star_emoji.png);}
 .like-emoji::before{background-image: url(./images/like_emoji.png);}
+.pensive-emoji::before{background-image: url(./images/pensive_emoji.png);}
+.lol-emoji::before{background-image: url(./images/lol_emoji.png);}
+.heart-emoji::before{background-image: url(./images/heart_emoji.png);}
 
 /* emoji class end*/
 
+/* .write-wrap{max-width: 40%;} */
 .write-wrap{
     width: 40%;
+    display: flex;
+    flex-direction: column;
 }
+
 .write-title{
+    margin-bottom: auto;
     text-align: center;
     font-size: 50px;
     font-weight: 810;
@@ -132,6 +138,7 @@ body{
     position: relative;
     z-index: 0;
     font-family: 'EarlyFontDiary';
+    word-break: keep-all;
 }
 
 .write-title::before{
@@ -142,7 +149,7 @@ body{
     right: 0;
     top: 0;
     bottom: 0;
-    margin: 15px 45px -5px;
+    margin: 15px 30px -5px;
     background-color: rgba(255, 217, 0, 0.5);
     z-index: -1;
 }
@@ -150,6 +157,7 @@ body{
 .write-input{
     width: 100%;
     font-family: 'Gowun Batang', serif;
+
 }
 .title-input{
     font-size: 25px;
@@ -158,11 +166,11 @@ body{
     font-weight: 700;
     padding: 0 15px 5px 15px;
     padding-bottom: 10px;
-    margin-top: 40px;
+    box-sizing: border-box;
 }
 
 .txt-input{
-    height: 350px;
+    height: 400px;
     padding: 15px;
     box-sizing: border-box;
     border: 3px solid #eee;
@@ -175,14 +183,20 @@ body{
 .title-input:focus,
 .txt-input:focus{border-color: #999;}
 
+.emoji-wrap{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 0.25%;
+    justify-content: flex-start;
+}
 .emoji{
-    min-width: 70px;
-    height: 70px;
+    width: 8.6%;
+    height: 55px; 
 }
 .emoji::before{
-    width: 70px;
-    height: 70px;
-    background-size: 60px;
+    width: 100%;
+    height: 100%;
+    background-size: 47px;
     background-color: #fff;
     filter: grayscale(1);
 }
@@ -190,10 +204,10 @@ body{
 
 .btn-upload{
     width: 100%;
-    margin-top: 10px;
     font-size: 20px;    
     padding: 20px;
     background-color: #999;
+    margin-top: auto;
 }
 
 .btn-upload:hover{
@@ -202,6 +216,16 @@ body{
 /* write-wrap end */
 
 .list-wrap{width: 60%;}
+
+.waiting-msg{
+    display: block;
+    text-align: center;
+    font-size: 30px;
+    color: #aaa;
+}
+.waiting-msg.close{
+    display: none;
+}
 
 .list-wrap .memo-list{
     width: 100%;
@@ -222,7 +246,7 @@ body{
     border-left: 1px solid #f6f6f6;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    gap: 0 15px;
     align-items: center;
 }
 
@@ -237,7 +261,7 @@ body{
 .memo .title-memo{
     font-weight: 700;
     font-size: 25px;
-    width: 860px;
+    max-width: 860px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;  
@@ -264,12 +288,14 @@ body{
     border: 1px solid #ddd;
     background-color: #eee;
     color: #666;
+    margin-left: auto;
 }
 .memo .btn-delete:hover{
     background-color: #888;
     color: #fff;
 }
 /* .list-wrap end */
+
 .all-delete-btn{
     position: fixed;
     height: 60px;
@@ -289,4 +315,33 @@ body{
 }
 .all-delete-btn:hover{
     right: 0px;
+}
+
+/* media */
+@media screen and (max-width:1200px) {
+    .wrapping{
+        flex-direction: column;
+        top:inherit;
+        bottom: inherit;
+        gap: 0;
+        margin: 40px 0;
+    }
+
+    .content-wrap{margin: 0;}
+
+    .write-wrap, .list-wrap{
+        width: 100%;
+        margin-bottom: 40px;
+    }
+    .write-title{
+        margin-bottom: 70px;
+    }
+
+    .btn-upload{
+        margin-top: 40px;
+    }
+
+    .input-wrap{    
+        justify-content: space-between;
+    }
 }

@@ -2,9 +2,12 @@ const writeTitle = document.querySelector('.title-input');
 const writeTxt = document.querySelector('.txt-input');
 const uploadBtn = document.querySelector('.btn-upload');
 const allDeletedBtn = document.querySelector('.all-delete-btn');
+const waitingMsg = document.querySelector('.waiting-msg');
 const showUl = document.querySelector('.memo-list');
 const memes=[];
 const MEMO_LIST = 'memoList';
+
+toggleWaitingMag();
 
 if(localStorage.getItem(MEMO_LIST)){ //localStorage에 memo가 있으면 첫 화면 작성
     const nowMemoList = localStorage.getItem(MEMO_LIST);
@@ -13,15 +16,17 @@ if(localStorage.getItem(MEMO_LIST)){ //localStorage에 memo가 있으면 첫 화
         memoMaking(memo);
     });
 }
-allDeletedBtn.addEventListener('click',()=>{// all memo delete btn
+
+allDeletedBtn.addEventListener('click',()=>{// 모든 메모 삭제
     if(confirm('정말로 모든 기록을 삭제하실 건가요?😱')){
         localStorage.clear(MEMO_LIST);
         showUl.innerHTML='';
         alert('모든 추억이 사라집니다.😥');
+        toggleWaitingMag();
     }
 });
 
-uploadBtn.addEventListener('click',(e)=>{ // click upload btn => upload new memo 
+uploadBtn.addEventListener('click',(e)=>{ // 새로운 메모 작성 등록
     const userEmoji = document.querySelector('input[name="emoji"]:checked').value;
     if(writeTxt.value !== '' && writeTitle.value){
         const newMemo = {
@@ -33,12 +38,13 @@ uploadBtn.addEventListener('click',(e)=>{ // click upload btn => upload new memo
         memes.push(newMemo);
         localStorage.setItem(MEMO_LIST,JSON.stringify(memes));
         memoMaking(newMemo);
+        toggleWaitingMag();
     }else{
         alert('텍스트를 입력해주세요.');
     }
 });
 
-showUl.addEventListener('click',(e)=>{ // memo delete btn
+showUl.addEventListener('click',(e)=>{ // 해당 메모만 삭제
     if(e.target.classList.contains('btn-delete')){
         const nowMemoList = localStorage.getItem(MEMO_LIST);
         const arrMemo = JSON.parse(nowMemoList);
@@ -49,11 +55,20 @@ showUl.addEventListener('click',(e)=>{ // memo delete btn
             parentLi.remove();
             localStorage.setItem(MEMO_LIST,JSON.stringify(arrMemo.filter(x => x.id != parentLi.id)));
             alert('삭제되었습니다.');
+            toggleWaitingMag();
         }
     }
 });
 
-function memoMaking(memo){ //make memo li tag
+function toggleWaitingMag(){ // 리스트에 메모가 없을 시 글 등장 함수
+    if(showUl.querySelectorAll('li').length>0){
+        waitingMsg.classList.add('close');
+    }else{
+        waitingMsg.classList.remove('close');
+    }
+}
+
+function memoMaking(memo){ //li.memo 제작 함수
     const liEl = document.createElement('li');
     const btnEl = document.createElement('button');
     const h3El = document.createElement('h3');
@@ -66,7 +81,6 @@ function memoMaking(memo){ //make memo li tag
     
     pEl.classList.add('txt-memo','scroll');
     pEl.innerText= memo.txt;
-    // pEl.textContent = memo.txt;
     
     spanEl.classList.add('time-memo');
     spanEl.textContent =writingTime(writeDate);
@@ -84,7 +98,7 @@ function memoMaking(memo){ //make memo li tag
     showUl.prepend(liEl);
 }
 
-function writingTime(day){ //make write time 
+function writingTime(day){ //li 안에 들어가는 요일 및 시간
     const dayArr = ['일','월','화','수','목','금','토'];
     let resultDay='';
     resultDay = `${day.getFullYear()}/${day.getMonth() + 1}/${day.getDate()}/${dayArr[day.getDay()]}`;
