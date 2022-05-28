@@ -7,7 +7,9 @@ const showUl = document.querySelector('.memo-list');
 const memes=[];
 const MEMO_LIST = 'memoList';
 
-toggleWaitingMag();
+window.addEventListener('load',()=>{
+    toggleWaitingMag();
+})
 
 if(localStorage.getItem(MEMO_LIST)){ //localStorage에 memo가 있으면 첫 화면 작성
     const nowMemoList = localStorage.getItem(MEMO_LIST);
@@ -60,12 +62,9 @@ showUl.addEventListener('click',(e)=>{ // 해당 메모만 삭제
     }
 });
 
-function toggleWaitingMag(){ // 리스트에 메모가 없을 시 글 등장 함수
-    if(showUl.querySelectorAll('li').length>0){
-        waitingMsg.classList.add('close');
-    }else{
-        waitingMsg.classList.remove('close');
-    }
+function toggleWaitingMag(){ // 리스트에 메모가 없을 시 메세지 함수
+    const liListStatus =  showUl.querySelectorAll('li').length;
+    (liListStatus===0)?waitingMsg.classList.remove('close'):waitingMsg.classList.add('close');
 }
 
 function memoMaking(memo){ //li.memo 제작 함수
