@@ -30,7 +30,7 @@ allDeletedBtn.addEventListener('click',()=>{// 모든 메모 삭제
 
 uploadBtn.addEventListener('click',(e)=>{ // 새로운 메모 작성 등록
     const userEmoji = document.querySelector('input[name="emoji"]:checked').value;
-    if(writeTxt.value !== '' && writeTitle.value){
+    if(writeTxt.value !== '' && writeTitle.value !== ''){
         const newMemo = {
             title:writeTitle.value,
             txt: writeTxt.value,
@@ -41,8 +41,10 @@ uploadBtn.addEventListener('click',(e)=>{ // 새로운 메모 작성 등록
         localStorage.setItem(MEMO_LIST,JSON.stringify(memes));
         memoMaking(newMemo);
         toggleWaitingMag();
-    }else{
-        alert('텍스트를 입력해주세요.');
+    }else if(writeTitle.value === ''){
+        alert('제목을 입력해주세요.');
+    }else if(writeTxt.value === ''){
+        alert('내용을 입력해주세요.');
     }
 });
 
