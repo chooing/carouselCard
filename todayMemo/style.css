@@ -1,10 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap');
+
 @font-face {
     font-family: 'EarlyFontDiary';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_220508@1.0/EarlyFontDiary.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
 }
+
 
 /* reset */
 body, input{
@@ -37,6 +39,11 @@ ol,ul,li{
 }
 
 /* setting */
+
+:root{
+    --windowHeight:920;
+}
+
 body{
     background-color: #f6f6f6;
     font-family: 'Gowun Batang', serif;
@@ -85,20 +92,16 @@ body{
     right: 0;
     top: 0;
     bottom: 0;
-    margin:  auto;
+    margin: 40px auto;
 }
 
 .content-wrap{
-    padding:50px 30px 40px;
+    padding:calc(var(--windowHeight) * 0.04px) 30px;
     background-color: #fff;
     border-radius: 10px;
-    margin: 40px 0;
     box-sizing: border-box;
 }
 
-.input-wrap{
-    margin-bottom: 20px;
-}
 /* design */
 .emoji::before,
 .memo::before{
@@ -109,7 +112,7 @@ body{
 }
 
 .smile-emoji::before{background-image: url(./images/smile_emoji.png);}
-.love-emoji::before{background-image: url(./images/love_emoji.png); background-size: 50px;}
+.love-emoji::before{background-image: url(./images/love_emoji.png);}
 .tired-emoji::before{background-image: url(./images/tired_emoji.png);}
 .sick-emoji::before{background-image: url(./images/sick_emoji.png);}
 .sad-emoji::before{background-image: url(./images/sad_emoji.png);}
@@ -122,18 +125,20 @@ body{
 
 /* emoji class end*/
 
-/* .write-wrap{max-width: 40%;} */
 .write-wrap{
     width: 40%;
     display: flex;
     flex-direction: column;
+    overflow-y: auto;
+    gap: 20px 0;
 }
 
 .write-title{
     margin-bottom: auto;
     text-align: center;
-    font-size: 50px;
-    font-weight: 810;
+    /* font-size: 50px; */
+    font-size: 6vmin;
+    font-weight: 700;
     color: #333;
     position: relative;
     z-index: 0;
@@ -170,7 +175,7 @@ body{
 }
 
 .txt-input{
-    height: 400px;
+    height: calc(var(--windowHeight) * 0.4px) ;
     padding: 15px;
     box-sizing: border-box;
     border: 3px solid #eee;
@@ -196,7 +201,7 @@ body{
 .emoji::before{
     width: 100%;
     height: 100%;
-    background-size: 47px;
+    background-size: contain;
     background-color: #fff;
     filter: grayscale(1);
 }
@@ -205,7 +210,7 @@ body{
 .btn-upload{
     width: 100%;
     font-size: 20px;    
-    padding: 20px;
+    padding: 15px;
     background-color: #999;
     margin-top: auto;
 }

@@ -7,6 +7,16 @@ const showUl = document.querySelector('.memo-list');
 const memes=[];
 const MEMO_LIST = 'memoList';
 
+const root = document.querySelector(':root');
+root.style.setProperty('--windowHeight', window.innerHeight);
+
+window.addEventListener('resize',(e)=>{ 
+    // if(window.innerHeight > 765){
+        root.style.setProperty('--windowHeight', window.innerHeight);
+    // }
+})
+
+
 window.addEventListener('load',()=>{
     toggleWaitingMag();
 })
