@@ -29,6 +29,13 @@ body{
     color:#e6e6e6;
 }
 
+.hide{
+	display:block;
+	overflow:hidden;
+	Font-size:1px;
+	line-height:0;
+	text-indent:-9999px;
+}
 /* design */
 
 
