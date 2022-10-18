@@ -4,10 +4,10 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <!-- <meta
+        <meta
             name="viewport"
             content="user-scalable=yes, initial-scale=1.0, maximum-scale=2.0, minimum-scale=0.5, width=device-width"
-        /> -->
+        />
         <title></title>
         <style>
             canvas {
@@ -22,7 +22,8 @@
         <button type="button" id="origin">=</button>
         <button type="button" id="minus">-</button>
         <button type="bind" id="bind">bind</button>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.3.1/fabric.min.js"></script>
+        <script src="./fabric.js"></script>
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.3.1/fabric.min.js"></script> -->
         <script>
             var canvas = new fabric.Canvas("c");
             canvas.setHeight(600);
@@ -35,21 +36,35 @@
                 top: 300 / 2 - 20,
             });
             canvas.add(minion1);
+
             canvas.on("touch:gesture", function (event) {
-                // Handle zoom only if 2 fingers are touching the screen
+                console.log("1");
                 if (event.e.touches && event.e.touches.length == 2) {
-                    // Get event point
-                    var point = new fabric.Point(event.self.x, event.self.y);
-                    // Remember canvas scale at gesture start
                     if (event.self.state == "start") {
                         zoomStartScale = self.canvas.getZoom();
                     }
                     // Calculate delta from start scale
                     var delta = zoomStartScale * event.self.scale;
                     // Zoom to pinch point
-                    self.canvas.zoomToPoint(point, delta);
+                    self.canvas.setZoom(delta);
                 }
             });
+
+            // canvas.on("touch:gesture", function (event) {
+            //     // Handle zoom only if 2 fingers are touching the screen
+            //     if (event.e.touches && event.e.touches.length == 2) {
+            //         // Get event point
+            //         var point = new fabric.Point(event.self.x, event.self.y);
+            //         // Remember canvas scale at gesture start
+            //         if (event.self.state == "start") {
+            //             zoomStartScale = self.canvas.getZoom();
+            //         }
+            //         // Calculate delta from start scale
+            //         var delta = zoomStartScale * event.self.scale;
+            //         // Zoom to pinch point
+            //         self.canvas.zoomToPoint(point, delta);
+            //     }
+            // });
             // canvas.on({
             //     "touch:gesture": function (e) {
             //         if (e.e.touches && e.e.touches.length == 2) {

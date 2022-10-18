@@ -22,7 +22,8 @@
         <button type="button" id="origin">=</button>
         <button type="button" id="minus">-</button>
         <button type="bind" id="bind">bind</button>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.3.1/fabric.min.js"></script>
+        <script src="./fabric.js"></script>
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.3.1/fabric.min.js"></script> -->
         <script>
             var canvas = new fabric.Canvas("c");
             canvas.setHeight(600);
@@ -35,7 +36,7 @@
                 top: 300 / 2 - 20,
             });
             canvas.add(minion1);
-
+            fabric.isTouchSupported = true;
             fabric.Image.fromURL("./resource.jpg", function (img) {
                 img.scale(0.5).set({
                     left: 150,
@@ -49,26 +50,31 @@
 
             canvas.on({
                 "touch:gesture": function () {
+                    console.log("gesture");
                     var text = document.createTextNode(" Gesture ");
                     info.insertBefore(text, info.firstChild);
                     minion1.set("fill", "red");
                 },
                 "touch:drag": function () {
+                    console.log("Dragging");
                     var text = document.createTextNode(" Dragging ");
                     info.insertBefore(text, info.firstChild);
                     minion1.set("fill", "orange");
                 },
                 "touch:orientation": function () {
+                    console.log("Orientation");
                     var text = document.createTextNode(" Orientation ");
                     info.insertBefore(text, info.firstChild);
                     minion1.set("fill", "blue");
                 },
                 "touch:shake": function () {
+                    console.log("Shaking");
                     var text = document.createTextNode(" Shaking ");
                     info.insertBefore(text, info.firstChild);
                     minion1.set("fill", "black");
                 },
                 "touch:longpress": function () {
+                    console.log("Longpress");
                     var text = document.createTextNode(" Longpress ");
                     info.insertBefore(text, info.firstChild);
                     minion1.set("fill", "gold");
