@@ -1,4 +1,4 @@
-var canvas = new fabric.Canvas("c");
+var canvas = new fabric.Canvas("d");
 canvas.setHeight(600);
 canvas.setWidth(600);
 
