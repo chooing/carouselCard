@@ -29,26 +29,33 @@
             canvas.setHeight(600);
             canvas.setWidth(600);
             var minion1 = new fabric.Rect({
-                width: 40,
-                height: 40,
+                width: 100,
+                height: 100,
                 fill: "green",
-                left: 300 / 2 - 20,
-                top: 300 / 2 - 20,
+                left: 300 - 50,
+                top: 300 - 50,
             });
             canvas.add(minion1);
 
             canvas.on("touch:gesture", function (event) {
-                console.log("1");
-                if (event.e.touches && event.e.touches.length == 2) {
-                    if (event.self.state == "start") {
-                        zoomStartScale = self.canvas.getZoom();
-                    }
-                    // Calculate delta from start scale
-                    var delta = zoomStartScale * event.self.scale;
-                    // Zoom to pinch point
-                    self.canvas.setZoom(delta);
-                }
+                isGestureEvent = true;
+                var lPinchScale = event.self.scale;
+                var scaleDiff = (lPinchScale - 1) / 10 + 1; // Slow down zoom speed
+                canvas.setZoom(canvas.viewport.zoom * scaleDiff);
             });
+
+            // canvas.on("touch:gesture", function (event) {
+            //     console.log("1");
+            //     if (event.e.touches && event.e.touches.length == 2) {
+            //         if (event.self.state == "start") {
+            //             zoomStartScale = self.canvas.getZoom();
+            //         }
+            //         // Calculate delta from start scale
+            //         var delta = zoomStartScale * event.self.scale;
+            //         // Zoom to pinch point
+            //         self.canvas.setZoom(delta);
+            //     }
+            // });
 
             // canvas.on("touch:gesture", function (event) {
             //     // Handle zoom only if 2 fingers are touching the screen
