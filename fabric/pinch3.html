@@ -47,39 +47,82 @@
             });
 
             var info = document.getElementById("info");
-
             canvas.on({
-                "touch:gesture": function () {
-                    console.log("gesture");
-                    var text = document.createTextNode(" Gesture ");
-                    info.insertBefore(text, info.firstChild);
-                    minion1.set("fill", "red");
+                "touch:gesture": function (e) {
+                    if (e.e.touches && e.e.touches.length == 2) {
+                        pausePanning = true;
+                        var point = new fabric.Point(e.self.x, e.self.y);
+                        if (e.self.state == "start") {
+                            zoomStartScale = canvas.getZoom();
+                        }
+                        var delta = zoomStartScale * e.self.scale;
+                        canvas.zoomToPoint(point, delta);
+                        pausePanning = false;
+                    }
                 },
-                "touch:drag": function () {
-                    console.log("Dragging");
-                    var text = document.createTextNode(" Dragging ");
-                    info.insertBefore(text, info.firstChild);
-                    minion1.set("fill", "orange");
+                "object:selected": function () {
+                    pausePanning = true;
                 },
-                "touch:orientation": function () {
-                    console.log("Orientation");
-                    var text = document.createTextNode(" Orientation ");
-                    info.insertBefore(text, info.firstChild);
-                    minion1.set("fill", "blue");
+                "selection:cleared": function () {
+                    pausePanning = false;
                 },
-                "touch:shake": function () {
-                    console.log("Shaking");
-                    var text = document.createTextNode(" Shaking ");
-                    info.insertBefore(text, info.firstChild);
-                    minion1.set("fill", "black");
-                },
-                "touch:longpress": function () {
-                    console.log("Longpress");
-                    var text = document.createTextNode(" Longpress ");
-                    info.insertBefore(text, info.firstChild);
-                    minion1.set("fill", "gold");
+                "touch:drag": function (e) {
+                    if (
+                        pausePanning == false &&
+                        undefined != e.self.x &&
+                        undefined != e.self.x
+                    ) {
+                        currentX = e.self.x;
+                        currentY = e.self.y;
+                        xChange = currentX - lastX;
+                        yChange = currentY - lastY;
+
+                        if (
+                            Math.abs(currentX - lastX) <= 50 &&
+                            Math.abs(currentY - lastY) <= 50
+                        ) {
+                            var delta = new fabric.Point(xChange, yChange);
+                            canvas.relativePan(delta);
+                        }
+
+                        lastX = e.self.x;
+                        lastY = e.self.y;
+                    }
                 },
             });
+
+            // canvas.on({
+            //     "touch:gesture": function () {
+            //         console.log("gesture");
+            //         var text = document.createTextNode(" Gesture ");
+            //         info.insertBefore(text, info.firstChild);
+            //         minion1.set("fill", "red");
+            //     },
+            //     "touch:drag": function () {
+            //         console.log("Dragging");
+            //         var text = document.createTextNode(" Dragging ");
+            //         info.insertBefore(text, info.firstChild);
+            //         minion1.set("fill", "orange");
+            //     },
+            //     "touch:orientation": function () {
+            //         console.log("Orientation");
+            //         var text = document.createTextNode(" Orientation ");
+            //         info.insertBefore(text, info.firstChild);
+            //         minion1.set("fill", "blue");
+            //     },
+            //     "touch:shake": function () {
+            //         console.log("Shaking");
+            //         var text = document.createTextNode(" Shaking ");
+            //         info.insertBefore(text, info.firstChild);
+            //         minion1.set("fill", "black");
+            //     },
+            //     "touch:longpress": function () {
+            //         console.log("Longpress");
+            //         var text = document.createTextNode(" Longpress ");
+            //         info.insertBefore(text, info.firstChild);
+            //         minion1.set("fill", "gold");
+            //     },
+            // });
         </script>
     </body>
 </html>
