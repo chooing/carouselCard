@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- <meta
+            name="viewport"
+            content="user-scalable=yes, initial-scale=1.0, maximum-scale=2.0, minimum-scale=0.5, width=device-width"
+        /> -->
+        <title></title>
+        <style>
+            canvas {
+                border: 1px solid #000;
+                /* background-color: aliceblue; */
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id="c"></canvas>
+        <button type="button" id="plus">+</button>
+        <button type="button" id="origin">=</button>
+        <button type="button" id="minus">-</button>
+        <button type="bind" id="bind">bind</button>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.3.1/fabric.min.js"></script>
+        <script>
+            var canvas = new fabric.Canvas("c");
+            canvas.setHeight(600);
+            canvas.setWidth(600);
+            var minion1 = new fabric.Rect({
+                width: 40,
+                height: 40,
+                fill: "green",
+                left: 300 / 2 - 20,
+                top: 300 / 2 - 20,
+            });
+            canvas.add(minion1);
+
+            canvas.on({
+                "touch:gesture": function (e) {
+                    if (e.e.touches && e.e.touches.length == 2) {
+                        pausePanning = true;
+                        var point = new fabric.Point(e.self.x, e.self.y);
+                        if (e.self.state == "start") {
+                            zoomStartScale = canvas.getZoom();
+                        }
+                        var delta = zoomStartScale * e.self.scale;
+                        self.canvas.zoomToPoint(point, delta);
+                        pausePanning = false;
+                    }
+                },
+            });
+        </script>
+    </body>
+</html>

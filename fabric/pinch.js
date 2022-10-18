@@ -1,4 +1,7 @@
 var canvas = new fabric.Canvas("c");
+canvas.setHeight(600);
+canvas.setWidth(600);
+
 canvas.on("mouse:wheel", function (opt) {
     opt.e.preventDefault();
     opt.e.stopPropagation();
