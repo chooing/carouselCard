@@ -35,21 +35,35 @@
                 top: 300 / 2 - 20,
             });
             canvas.add(minion1);
-
-            canvas.on({
-                "touch:gesture": function (e) {
-                    if (e.e.touches && e.e.touches.length == 2) {
-                        pausePanning = true;
-                        var point = new fabric.Point(e.self.x, e.self.y);
-                        if (e.self.state == "start") {
-                            zoomStartScale = canvas.getZoom();
-                        }
-                        var delta = zoomStartScale * e.self.scale;
-                        self.canvas.zoomToPoint(point, delta);
-                        pausePanning = false;
+            canvas.on("touch:gesture", function (event) {
+                // Handle zoom only if 2 fingers are touching the screen
+                if (event.e.touches && event.e.touches.length == 2) {
+                    // Get event point
+                    var point = new fabric.Point(event.self.x, event.self.y);
+                    // Remember canvas scale at gesture start
+                    if (event.self.state == "start") {
+                        zoomStartScale = self.canvas.getZoom();
                     }
-                },
+                    // Calculate delta from start scale
+                    var delta = zoomStartScale * event.self.scale;
+                    // Zoom to pinch point
+                    self.canvas.zoomToPoint(point, delta);
+                }
             });
+            // canvas.on({
+            //     "touch:gesture": function (e) {
+            //         if (e.e.touches && e.e.touches.length == 2) {
+            //             pausePanning = true;
+            //             var point = new fabric.Point(e.self.x, e.self.y);
+            //             if (e.self.state == "start") {
+            //                 zoomStartScale = canvas.getZoom();
+            //             }
+            //             var delta = zoomStartScale * e.self.scale;
+            //             self.canvas.zoomToPoint(point, delta);
+            //             pausePanning = false;
+            //         }
+            //     },
+            // });
         </script>
     </body>
 </html>
